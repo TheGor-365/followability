@@ -1,0 +1,7 @@
+<p class="display-1 text-success text-center">
+  USERS
+</p>
+
+<div class="border rounded p-1">
+  <%= current_user ? (link_to 'Show user', users_show_path(current_user), class: 'text-success') : 'no signed in' %>
+</div>

@@ -16,12 +16,25 @@
     <div class="collapse navbar-collapse ms-5" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="<%=  %>"></a>
+          <a class="nav-link active" aria-current="page" href="<%= root_path %>">Posts</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="<%=  %>"></a>
+          <a class="nav-link" href="<%= new_post_path %>">Create Post</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<%= users_index_path %>">Users</a>
         </li>
       </ul>
     </div>
+    <% if user_signed_in? %>
+      <small class="border rounded border-success p-1 me-3 text-success">
+        <%= current_user.email %>
+      </small>
+      <%= link_to 'Settings', edit_user_registration_path, class: "text-dark mr-3 text-decoration-none me-3" %>
+      <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: "btn btn-outline-danger" %>
+    <% else %>
+      <%= link_to 'Sign in', new_user_session_path, class: "btn btn-success me-3" %>
+      <%= link_to 'Sign up', new_user_registration_path, class: "btn btn-secondary" %>
+    <% end %>
   </div>
 </nav>
