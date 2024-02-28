@@ -1,3 +1,21 @@
-<p class="display-1 text-success text-center">
-  <%= current_user.email %>
+<p class="display-1 text-success text-center mb-5">
+  <%= current_user.email if current_user %>
 </p>
+
+<p class="display-6 mb-5">
+  Posts
+</p>
+
+<div class="border border-secondary p-5 rounded">
+  <% if @posts.empty? %>
+    <p>Oops, there's nothing here.</p>
+  <% else %>
+    <% @posts.each do |post| %>
+      <p><%= post.title %></p>
+      <small class="text-muted">
+        <%= post.body %>
+      </small>
+      <hr class="my-5">
+    <% end %>
+  <% end %>
+</div>

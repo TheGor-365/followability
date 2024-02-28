@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
-  root "posts#index"
+  root "users#index"
 
   devise_for :users
 
   resources :posts
-  
-  get 'users/index'
-  get 'users/show'
+  resources :users, only: [:index, :show]
+
+  post 'users/:id/block', to: 'users#block', as: 'block_user'
 end

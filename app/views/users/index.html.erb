@@ -1,7 +1,28 @@
-<p class="display-1 text-success text-center">
+<p class="display-1 text-success text-center mb-5">
   USERS
 </p>
 
-<div class="border rounded p-1">
-  <%= current_user ? (link_to 'Show user', users_show_path(current_user), class: 'text-success') : 'no signed in' %>
-</div>
+<% @users.each do |user| %>
+  <div class="col-6 rounded border border-secondary my-3 p-3">
+    <p class="text-muted">
+      <%= user.email %>
+    </p>
+
+    <div class="btn-group">
+      <%= link_to 'Blocker', block_user_path(user), data: { turbo_method: :post }, class: 'btn btn-outline-warning btn-sm text-dark' %>
+      <span class="btn btn-primary btn-sm">
+        <%= current_user.blocked?(user) ? 'Unblock' : 'Block' %>
+      </span>
+      <%= link_to 'Show', user, class: 'btn btn-outline-success btn-sm' %>
+    </div>
+
+    <span class="text-secondary border border-secondary rounded p-2 float-end border-opacity-50">
+      Blocked you:
+      <span class="<%= user.blocked?(current_user)? 'text-danger' : 'text-success' %>">
+        <strong>
+          <%= user.blocked?(current_user) %>
+        </strong>
+      </span>
+    </span>
+  </div>
+<% end %>
